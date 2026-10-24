@@ -1,0 +1,73 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>ServiceFuze Backup Utility</title>
+<meta name="description" content="A private backup utility that stores encrypted archives of its operator's own software development repository in the operator's own Google Drive accounts.">
+<style>
+  :root { color-scheme: light dark; --fg:#15202b; --muted:#5a6672; --bg:#fff; --line:#e3e8ed; --accent:#0E1C27; }
+  @media (prefers-color-scheme: dark) {
+    :root { --fg:#e8edf2; --muted:#9aa7b4; --bg:#121a21; --line:#263340; --accent:#e8edf2; }
+  }
+  * { box-sizing: border-box; }
+  body { margin:0; background:var(--bg); color:var(--fg);
+         font:16px/1.65 -apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Helvetica,Arial,sans-serif; }
+  main { max-width:44rem; margin:0 auto; padding:3rem 1.25rem 4rem; }
+  h1 { font-size:1.6rem; line-height:1.25; margin:0 0 .35rem; letter-spacing:-0.01em; }
+  .sub { color:var(--muted); margin:0 0 2.25rem; }
+  h2 { font-size:1.05rem; margin:2.25rem 0 .6rem; }
+  p, li { margin:0 0 .85rem; }
+  ul { padding-left:1.15rem; }
+  code { font:0.9em ui-monospace,SFMono-Regular,Menlo,monospace;
+         background:color-mix(in srgb, var(--fg) 7%, transparent); padding:.1em .35em; border-radius:4px;
+         overflow-wrap:anywhere; word-break:break-word; }
+  footer { margin-top:3rem; padding-top:1.25rem; border-top:1px solid var(--line); color:var(--muted); font-size:.9rem; }
+  a { color:inherit; text-decoration-color:var(--muted); text-underline-offset:3px; }
+</style>
+</head>
+<body>
+<main>
+  <h1>ServiceFuze Backup Utility</h1>
+  <p class="sub">A private, single-operator tool that keeps encrypted backups of its
+  operator's own software development work.</p>
+
+  <h2>What it is</h2>
+  <p>This is not a product and is not offered to anyone else. It is a set of scripts
+  run on one personal computer by one person, who is also its only user. It exists
+  to protect that person's own software development repository — in particular work
+  that exists only on that computer and has not yet been published anywhere.</p>
+
+  <h2>What it does</h2>
+  <ul>
+    <li>Creates a compressed archive of the operator's own development repository.</li>
+    <li>Encrypts that archive on the operator's computer, before anything leaves it.</li>
+    <li>Uploads the encrypted archive to two Google Drive accounts belonging to the
+        operator, so that the loss of one account or computer does not lose the work.</li>
+    <li>Verifies each uploaded copy by reading it back and recomputing its checksum.</li>
+  </ul>
+
+  <h2>What it asks of Google Drive</h2>
+  <p>Exactly one permission: <code>drive.file</code>. That grants access only to
+  files this utility itself creates. It cannot see, read, modify or delete any other
+  file in the account — including the operator's own unrelated documents.</p>
+
+  <h2>Who it is for</h2>
+  <p>The operator, and nobody else. There is no sign-up, no service, no customers
+  and no other users. If you have arrived here from a Google consent screen, it is
+  because you are the operator.</p>
+
+  <h2>Privacy</h2>
+  <p>The archives are encrypted before upload, and the decryption key is held only
+  by the operator. It is never given to Google and is never held by the part of this
+  utility that creates and uploads archives, so their contents are not readable by
+  Google or by anyone with access to the Drive accounts. The full detail is in the
+  <a href="privacy.html">privacy policy</a>.</p>
+
+  <footer>
+    <p>Privately operated utility. Not affiliated with Google.
+    <a href="privacy.html">Privacy policy</a></p>
+  </footer>
+</main>
+</body>
+</html>

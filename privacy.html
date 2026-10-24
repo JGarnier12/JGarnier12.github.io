@@ -1,0 +1,135 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Privacy Policy — ServiceFuze Backup Utility</title>
+<meta name="description" content="How the ServiceFuze Backup Utility uses the Google Drive permission it requests, what it stores, and how long it keeps it.">
+<style>
+  :root { color-scheme: light dark; --fg:#15202b; --muted:#5a6672; --bg:#fff; --line:#e3e8ed; }
+  @media (prefers-color-scheme: dark) {
+    :root { --fg:#e8edf2; --muted:#9aa7b4; --bg:#121a21; --line:#263340; }
+  }
+  * { box-sizing: border-box; }
+  body { margin:0; background:var(--bg); color:var(--fg);
+         font:16px/1.65 -apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Helvetica,Arial,sans-serif; }
+  main { max-width:44rem; margin:0 auto; padding:3rem 1.25rem 4rem; }
+  h1 { font-size:1.5rem; line-height:1.25; margin:0 0 .3rem; letter-spacing:-0.01em; }
+  .sub { color:var(--muted); margin:0 0 2rem; font-size:.95rem; }
+  h2 { font-size:1.02rem; margin:2rem 0 .55rem; }
+  p, li { margin:0 0 .8rem; }
+  ul { padding-left:1.15rem; }
+  code { font:0.9em ui-monospace,SFMono-Regular,Menlo,monospace;
+         background:color-mix(in srgb, var(--fg) 7%, transparent); padding:.1em .35em; border-radius:4px;
+         overflow-wrap:anywhere; word-break:break-word; }
+  table { border-collapse:collapse; width:100%; margin:0 0 1rem; font-size:.95rem; }
+  th, td { text-align:left; padding:.5rem .6rem; border-bottom:1px solid var(--line); vertical-align:top;
+           overflow-wrap:anywhere; }
+  th { font-weight:600; }
+  footer { margin-top:3rem; padding-top:1.25rem; border-top:1px solid var(--line); color:var(--muted); font-size:.9rem; }
+  a { color:inherit; text-decoration-color:var(--muted); text-underline-offset:3px; }
+</style>
+</head>
+<body>
+<main>
+  <h1>Privacy Policy</h1>
+  <p class="sub">ServiceFuze Backup Utility · last updated 23 October 2026</p>
+
+  <h2>1. What this utility is</h2>
+  <p>The ServiceFuze Backup Utility is a privately operated set of scripts run on a
+  single personal computer by a single person. That person is its operator and its
+  only user. It is not a product, not a service, and is not made available to anyone
+  else. There is no sign-up and there are no accounts other than the operator's own.</p>
+  <p>Its purpose is to keep encrypted off-machine copies of the operator's own
+  software development repository, so that a computer failure does not destroy work
+  that exists nowhere else.</p>
+
+  <h2>2. The Google permission it requests, and what that permission allows</h2>
+  <p>It requests exactly one Google OAuth scope:</p>
+  <p><code>https://www.googleapis.com/auth/drive.file</code></p>
+  <p>This is Google's per-file scope. It grants access <strong>only to files this
+  utility itself creates</strong>. Consequently this utility:</p>
+  <ul>
+    <li><strong>cannot</strong> list, read, download, modify or delete any other file
+        in the Google Drive account — including documents, photos, and backups made
+        by other means;</li>
+    <li><strong>cannot</strong> read file or folder names outside what it created;</li>
+    <li><strong>cannot</strong> access Gmail, Contacts, Calendar, Photos or any other
+        Google service.</li>
+  </ul>
+  <p>No broader scope is requested, and none is needed.</p>
+
+  <h2>3. What it stores in Google Drive</h2>
+  <p>In a single folder that it creates for itself, and nowhere else:</p>
+  <table>
+    <tr><th>File</th><th>What it is</th></tr>
+    <tr><td><code>servicefuze-&lt;timestamp&gt;-&lt;label&gt;.tar.gz.age</code></td>
+        <td>An encrypted archive of the operator's own development repository.</td></tr>
+    <tr><td><code>…​.tar.gz.age.sha256</code></td>
+        <td>A checksum, used to verify the upload arrived intact.</td></tr>
+    <tr><td><code>…​.meta.tar.gz.age</code></td>
+        <td>An encrypted copy of the repository's version-control metadata.</td></tr>
+  </table>
+  <p>The archive contains the operator's own source code, configuration and
+  development documentation. It is not a service that collects information from other
+  people, and it does not gather any information from visitors to these pages.</p>
+
+  <h2>4. Encryption</h2>
+  <p>Every archive is encrypted on the operator's computer <em>before</em> it is
+  uploaded, using <a href="https://age-encryption.org">age</a> with an X25519 key
+  pair.</p>
+  <p>The scheduled backup holds only the <strong>public</strong> half of that key
+  pair, so the process that creates and uploads archives has no ability to decrypt
+  them. The private half is kept separately by the operator, in the operator's own
+  password store and in an offline copy. It is never given to Google, never placed in
+  Google Drive, never written to this utility's logs or reports, and is never
+  available to the scheduled process that performs the uploads.</p>
+  <p>The practical effect: the contents of these archives are not readable by Google,
+  nor by anyone who obtains access to the Google Drive accounts, nor by anyone who
+  obtains the backup computer's scheduled task.</p>
+
+  <h2>5. Credentials</h2>
+  <ul>
+    <li><strong>No Google password is ever requested, seen, stored or transmitted by
+        this utility.</strong> Sign-in happens on Google's own pages.</li>
+    <li>Authorisation is held as an OAuth refresh token stored locally in the
+        operator's own configuration file, readable only by the operator's user
+        account.</li>
+    <li>Tokens are never sent anywhere except to Google, and are never written to logs
+        or reports.</li>
+    <li>Authorisation can be withdrawn at any time by the operator at
+        <a href="https://myaccount.google.com/permissions">myaccount.google.com/permissions</a>,
+        which immediately prevents any further access.</li>
+  </ul>
+
+  <h2>6. How long files are kept</h2>
+  <p>The intended retention is seven daily, four weekly and three monthly recovery
+  points in each account. Expiry only ever considers files that this utility itself
+  created and named, inside its own folder; anything else in the account is outside
+  what it can see or act on.</p>
+  <p>At the time of writing, automatic deletion of remote files is <strong>disabled</strong>,
+  so nothing is removed from either Google Drive account without the operator doing
+  it deliberately.</p>
+
+  <h2>7. Sharing</h2>
+  <p>Nothing is shared with anyone. There are no third-party processors, no analytics,
+  no advertising, and no transfer of data to any party other than Google Drive acting
+  as the operator's own storage. These pages themselves set no cookies, load no
+  third-party resources, and run no scripts.</p>
+
+  <h2>8. Changes</h2>
+  <p>If what this utility does changes materially, this page will be updated and the
+  date above revised.</p>
+
+  <h2>9. Contact</h2>
+  <p>This utility has one user, who is its operator. Questions about it or about
+  this policy can be sent to the support address shown on the Google consent screen
+  for this application.</p>
+
+  <footer>
+    <p><a href="index.html">ServiceFuze Backup Utility</a> ·
+    Privately operated. Not affiliated with Google.</p>
+  </footer>
+</main>
+</body>
+</html>
